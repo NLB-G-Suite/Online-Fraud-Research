@@ -1,7 +1,7 @@
 import json
 import sys
 
-data = json.load(open('data2.json'))
+# data = json.load(open('data2.json'))
 
 temp=""
 categories = []
