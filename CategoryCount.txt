@@ -1,0 +1,15 @@
+People & Blogs: 285
+Autos & Vehicles: 7
+How-to & Style: 175
+Science & Technology: 119
+Entertainment: 59
+Non-profits & Activism: 5
+News & Politics: 13
+Education: 151
+Gaming: 46
+Travel & Events: 6
+Film & Animation: 15
+Comedy: 6
+Sports: 3
+Music: 16
+Movies: 0
