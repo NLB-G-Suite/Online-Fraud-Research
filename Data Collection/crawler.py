@@ -8,10 +8,12 @@ DEVELOPER_KEY = "AIzaSyB84_YL94d4I_7ABN0ZCxnX10DxOQzAV74"
 YOUTUBE_API_SERVICE_NAME = "youtube"
 YOUTUBE_API_VERSION = "v3"
 
+# Authorization for using the Youtube API v3
 youtube = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION,developerKey=DEVELOPER_KEY)
 
 def youtube_search(q, token, res, max_results=50,order="relevance",  location=None, location_radius=None):
-    if len(res) >= 30:
+    # change res to number of results required
+    if len(res) >= 300:
         return
 
     search_response = youtube.search().list(
@@ -26,11 +28,14 @@ def youtube_search(q, token, res, max_results=50,order="relevance",  location=No
 
     for search_result in search_response.get("items", []):
     	res.append(search_result)
-    youtube_search("make money through clicking", search_response.get("nextPageToken"), res)
-
+        
+    youtube_search(q, search_response.get("nextPageToken"), res)
 
 if __name__ == "__main__":
+    #res is the list of results
     res = []
+    
+    # Change search query to the required query by changing the first argument of this function
     youtube_search("make money through clicking", None,res)
     
     title = []
@@ -88,6 +93,6 @@ if __name__ == "__main__":
 
     # with open('data2.json', 'w') as fp:
     #     json.dump(youtube_dict, fp)
-
+   
     with open('VideosPerChannel.json', 'w') as fp:
         json.dump(chan, fp)
