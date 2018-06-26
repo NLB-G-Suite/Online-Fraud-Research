@@ -1,5 +1,6 @@
 # Online-Frauds-Research
 ========================= Project Overview =========================
+
 The purpose of each file in this repository is as follows:
 1. crawler.py: Running this program will create a json file which contains information about the videos returned by a search query                        specified in the file. The information includes title of file, video ID, comments on the video etc.
 2. readData.py: This program is used to extract required information from the json file.
