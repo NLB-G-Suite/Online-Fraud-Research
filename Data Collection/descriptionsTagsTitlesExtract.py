@@ -18,11 +18,17 @@ def main():
 	for channel in data:
 		videoDict = {}
 		for id in data[channel]:
-			try:
-				results = json.loads(urllib2.urlopen("https://www.googleapis.com/youtube/v3/videos?part=snippet&id=" + str(id[1][32:]) + "&fields=items(snippet(title,description,tags))&type=video&key=AIzaSyB84_YL94d4I_7ABN0ZCxnX10DxOQzAV74").read())
-			except Exception,e:
-				count += 1.0
-				print str(e)
+			getVid = True
+			while getVid:
+				try:
+					results = json.loads(urllib2.urlopen("https://www.googleapis.com/youtube/v3/videos?part=snippet&id=" + str(id[1][32:]) + "&fields=items(snippet(title,description,tags))&type=video&key=AIzaSyB84_YL94d4I_7ABN0ZCxnX10DxOQzAV74").read())
+					getVid = False
+				except urllib2.URLError,e:
+					continue
+				except Exception,e:
+					print 'GetVideo Error:',str(e)
+					break
+			if getVid:
 				continue
 			try:
 				videoDict['description'] = results['items'][0]['snippet']['description']
@@ -30,21 +36,21 @@ def main():
 				if str(e) == "'description'":
 					videoDict['description'] = "No Description"
 				else:
-					print str(e)
+					print 'Description Error:',str(e)
 			try:
 				videoDict['tags'] = results['items'][0]['snippet']['tags']
 			except Exception,e:
 				if str(e) == "'tags'":
 					videoDict['tags'] = "No Tags"
 				else:
-					print str(e)
+					print 'Tags Error:',str(e)
 			try:
 				videoDict['title'] = results['items'][0]['snippet']['title']
 			except Exception,e:
 				if str(e) == "'title'":
 					videoDict['title'] = "No Title"
 				else:
-					print str(e)
+					print 'Title:',str(e)
 			count += 1.0
 			mainDict[channel] = {}
 			mainDict[channel][id[1][32:]] = videoDict
