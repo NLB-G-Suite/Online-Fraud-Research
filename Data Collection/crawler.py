@@ -31,7 +31,7 @@ def youtube_search(q, token, res, numberOfResults, max_results=50,order="relevan
         
     youtube_search(q, search_response.get("nextPageToken"), res, numberOfResults)
 
-def query(q, numberOfResults):
+def search(q, numberOfResults):
     #res is the list of results
     res = []
     
