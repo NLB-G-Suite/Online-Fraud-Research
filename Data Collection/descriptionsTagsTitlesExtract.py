@@ -16,9 +16,10 @@ def main():
 	print 'TOTAL: ',tcount
 	count = 0.0
 	for channel in data:
-		videoDict = {}
+		mainDict[channel] = {}
 		for id in data[channel]:
 			getVid = True
+			videoDict = {}
 			while getVid:
 				try:
 					results = json.loads(urllib2.urlopen("https://www.googleapis.com/youtube/v3/videos?part=snippet&id=" + str(id[1][32:]) + "&fields=items(snippet(title,description,tags))&type=video&key=AIzaSyB84_YL94d4I_7ABN0ZCxnX10DxOQzAV74").read())
@@ -52,11 +53,12 @@ def main():
 				else:
 					print 'Title:',str(e)
 			count += 1.0
-			mainDict[channel] = {}
 			mainDict[channel][id[1][32:]] = videoDict
 		print str(100*(count/tcount))[:4]+'% Complete'
 	with open('tagsDescriptionsChannel.json','w') as f:
 		json.dump(mainDict,f)
+
+#--------------------------------------------------------------------------------------------------------
 
 if __name__ == "__main__":
 	main()
