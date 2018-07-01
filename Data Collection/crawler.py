@@ -48,6 +48,7 @@ def search(q, numberOfResults):
     category = []
     videos = []
     comments = []
+    tags = []
 
     chan = {}
 
@@ -65,11 +66,10 @@ def search(q, numberOfResults):
             channelTitle.append(response['items'][0]['snippet']['channelTitle'])
             categoryId.append(response['items'][0]['snippet']['categoryId'])
             viewCount.append(response['items'][0]['statistics']['viewCount'])
-        
+            tags.append(response['items'][0]['snippet']['tags'])
+
             commentsOnVideo = json.loads(urllib2.urlopen("https://www.googleapis.com/youtube/v3/commentThreads?key=AIzaSyB84_YL94d4I_7ABN0ZCxnX10DxOQzAV74&textFormat=plainText&part=snippet&videoId=" + search_result['id']['videoId'] + "&maxResults=50").read())
             chanVids = json.loads(urllib2.urlopen("https://www.googleapis.com/youtube/v3/search?key=AIzaSyB84_YL94d4I_7ABN0ZCxnX10DxOQzAV74&channelId="+response['items'][0]['snippet']['channelId']+"&part=snippet,id&order=date&maxResults=50").read())
-
-
 
             d = []
             for k in range(len(chanVids['items'])):
@@ -83,13 +83,15 @@ def search(q, numberOfResults):
                 c.append(commentsOnVideo['items'][k]["snippet"]['topLevelComment']['snippet']['textDisplay'])
             comments.append(c)
         except Exception,e:
+            if str(e) == "'tags'":
+                tags.append(["No Tags"]) 
             print str(e)
         
         if 'commentCount' in response['items'][0]['statistics'].keys():
             commentCount.append(response['items'][0]['statistics']['commentCount'])
         else:
             commentCount.append([])
-    youtube_dict = {'channelId': channelId,'channelTitle': channelTitle,'categoryId':categoryId,'title':title,'videoId':videoId,'viewCount':viewCount,'commentCount':commentCount, 'comments': comments}
+    youtube_dict = {'tags': tags,'channelId': channelId,'channelTitle': channelTitle,'categoryId':categoryId,'title':title,'videoId':videoId,'viewCount':viewCount,'commentCount':commentCount, 'comments': comments}
 
     # with open('data2.json', 'w') as fp:
     #     json.dump(youtube_dict, fp)
