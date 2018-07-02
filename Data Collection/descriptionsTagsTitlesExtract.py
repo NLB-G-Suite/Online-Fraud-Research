@@ -55,7 +55,7 @@ def main():
 			count += 1.0
 			mainDict[channel][id[1][32:]] = videoDict
 		print str(100*(count/tcount))[:4]+'% Complete'
-	with open('tagsDescriptionsChannel.json','w') as f:
+	with open('tagsDescriptionsTitleChannel.json','w') as f:
 		json.dump(mainDict,f)
 
 #--------------------------------------------------------------------------------------------------------
