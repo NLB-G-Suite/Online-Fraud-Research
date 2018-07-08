@@ -1,4 +1,4 @@
-from crawler import search
+from crawlerFixed import search
 import sys
 
 def main(argv):

@@ -49,6 +49,7 @@ def search(q, numberOfResults):
     videos = []
     comments = []
     tags = []
+    description = []
 
     chan = {}
 
@@ -67,16 +68,17 @@ def search(q, numberOfResults):
             categoryId.append(response['items'][0]['snippet']['categoryId'])
             viewCount.append(response['items'][0]['statistics']['viewCount'])
             tags.append(response['items'][0]['snippet']['tags'])
+            description.append(response['items'][0]['snippet']['description'])
 
             commentsOnVideo = json.loads(urllib2.urlopen("https://www.googleapis.com/youtube/v3/commentThreads?key=AIzaSyB84_YL94d4I_7ABN0ZCxnX10DxOQzAV74&textFormat=plainText&part=snippet&videoId=" + search_result['id']['videoId'] + "&maxResults=50").read())
-            chanVids = json.loads(urllib2.urlopen("https://www.googleapis.com/youtube/v3/search?key=AIzaSyB84_YL94d4I_7ABN0ZCxnX10DxOQzAV74&channelId="+response['items'][0]['snippet']['channelId']+"&part=snippet,id&order=date&maxResults=50").read())
+            # chanVids = json.loads(urllib2.urlopen("https://www.googleapis.com/youtube/v3/search?key=AIzaSyB84_YL94d4I_7ABN0ZCxnX10DxOQzAV74&channelId="+response['items'][0]['snippet']['channelId']+"&part=snippet,id&order=date&maxResults=50").read())
 
-            d = []
-            for k in range(len(chanVids['items'])):
-                if 'videoId' in chanVids['items'][k]['id']:
-                    d.append('https://www.youtube.com/watch?v='+chanVids['items'][k]['id']['videoId'])
-            if response['items'][0]['snippet']['channelId'] not in chan:
-                chan[response['items'][0]['snippet']['channelId']] = d
+            # d = []
+            # for k in range(len(chanVids['items'])):
+            #     if 'videoId' in chanVids['items'][k]['id']:
+            #         d.append('https://www.youtube.com/watch?v='+chanVids['items'][k]['id']['videoId'])
+            # if response['items'][0]['snippet']['channelId'] not in chan:
+            #     chan[response['items'][0]['snippet']['channelId']] = d
 
             c = []
             for k in range(len(commentsOnVideo['items'])):
@@ -91,10 +93,10 @@ def search(q, numberOfResults):
             commentCount.append(response['items'][0]['statistics']['commentCount'])
         else:
             commentCount.append([])
-    youtube_dict = {'tags': tags,'channelId': channelId,'channelTitle': channelTitle,'categoryId':categoryId,'title':title,'videoId':videoId,'viewCount':viewCount,'commentCount':commentCount, 'comments': comments}
+    youtube_dict = {'description': description, 'tags': tags,'channelId': channelId,'channelTitle': channelTitle,'categoryId':categoryId,'title':title,'videoId':videoId,'viewCount':viewCount,'commentCount':commentCount, 'comments': comments}
 
-    # with open('data2.json', 'w') as fp:
-    #     json.dump(youtube_dict, fp)
+    with open('rawdata.json', 'w') as fp:
+        json.dump(youtube_dict, fp)
    
-    with open('VideosPerChannel.json', 'w') as fp:
-        json.dump(chan, fp)
+    # with open('VideosPerChannel.json', 'w') as fp:
+    #     json.dump(chan, fp)
