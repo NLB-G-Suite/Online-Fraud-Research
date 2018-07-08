@@ -105,14 +105,14 @@ if __name__=="__main__":
                 c.append(commentsOnVideo['items'][k]["snippet"]['topLevelComment']['snippet']['textDisplay'])
             comments.append(c)
         except:
-            comments = []
+            comments.append('No comments')
         try:
             if 'commentCount' in response['items'][0]['statistics'].keys():
                 commentCount.append(response['items'][0]['statistics']['commentCount'])
             else:
-                commentCount.append([])
+                commentCount.append("No commentCount")
         except:
-            commentCount.append([])
+            commentCount.append("No commentCount")
     youtube_dict = {'description': description, 'tags': tags,'channelId': channelId,'channelTitle': channelTitle,'categoryId':categoryId,'title':title,'videoId':videoId,'viewCount':viewCount,'commentCount':commentCount, 'comments': comments}
 
     with open('buffer.json', 'w') as fp:
