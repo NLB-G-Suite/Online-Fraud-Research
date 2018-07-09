@@ -3,18 +3,22 @@ import csv
 import re
 import url
 import urllib2
+import httplib2
 
 x = json.load(open('crawlerResult.json'))
 
 links=[]
-linkcount=[]
+linksCount=[]
 category=[]
-linksdown=[]
+linksDownCount=[]
+linksDown = []
+linksUp = []
 classification=[]
 
 notclassified=0
 
 count=0.0
+h = httplib2.Http(timeout=60)
 for i in range(len(x['videoId'])):
 	count += 1.0
 	print str(100*(count/923.0))[:4]+'%'
@@ -36,20 +40,26 @@ for i in range(len(x['videoId'])):
 
 	linkList=url.check(x['description'][i]+' ')
 	inactive=0
-	print linkList
+	videoLinksUp = []
+	videoLinksDown = []
 	for link in linkList:
-		if url.Active(link)=='not active':
-			# print url.Active(link)
+		result = url.active(link,h)
+		if result =='not active':
 			inactive+=1
-	linksdown.append(inactive)
+			videoLinksDown.append(link)
+		else:
+			videoLinksUp.append(link)
+	linksDownCount.append(inactive)
+	linksDown.append(videoLinksDown)
+	linksUp.append(videoLinksUp)
 
 	if len(linkList)!=0:
 		links.append(linkList)
-		linkcount.append(str(len(linkList)))
+		linksCount.append(str(len(linkList)))
 
 	else:
 		links.append('No links')
-		linkcount.append('0')
+		linksCount.append('0')
 
 	with open ('categorylist.txt','r') as file:
 		for line in file:
@@ -60,11 +70,11 @@ for i in range(len(x['videoId'])):
 	
 x['links']=links
 x['category']=category
-x['linkcount']=linkcount
-x['linksdown']=linksdown
+x['linksCount']=linksCount
+x['linksDown'] = linksDown
+x['linksUp'] = linksUp
+x['linksDownCount']=linksDownCount
 x['classification']=classification
 
-print 'not classified',notclassified
-
 with open('csvdata.json', 'w') as fp:
-	json.dump(x, fp)
+	json.dump(x,fp)

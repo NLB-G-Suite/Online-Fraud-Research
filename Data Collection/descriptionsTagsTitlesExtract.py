@@ -5,7 +5,6 @@ import json
 import urllib2
 
 #-----------------------------------------------------------------------------------------------------------
-
 def main():
 	mainDict = {}
 	data = json.load(open('VideosPerChannel.json'))
