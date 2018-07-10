@@ -5,7 +5,7 @@ import url
 import urllib2
 import httplib2
 
-def linkWork():
+def linkWork(nres):
 	x = json.load(open('buffer.json'))
 
 	links=[]
@@ -22,7 +22,7 @@ def linkWork():
 	h = httplib2.Http(timeout=60)
 	for i in range(len(x['videoId'])):
 		count += 1.0
-		print str(100*(count/923.0))[:4]+'%'
+		print str(100*(count/float(nres)))[:4]+'%'
 
 		classify=0
 		title=x['title'][i].encode('ascii','ignore')

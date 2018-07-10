@@ -12,7 +12,7 @@ def makeDict():
 	for channel in data:
 		for id in data[channel]:
 			tcount+=1.0
-	print 'TOTAL: ',tcount
+	# print 'TOTAL: ',tcount
 	count = 0.0
 	for channel in data:
 		mainDict[channel] = {}

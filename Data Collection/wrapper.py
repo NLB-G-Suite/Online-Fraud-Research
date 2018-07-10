@@ -14,7 +14,7 @@ def main(argv):
 	print "Running crawler.."
 	crawlerFixed.search(query, nres)
 	print "Exiting crawler.. Starting Link Analysis.."
-	linkAnalysis.linkWork()
+	linkAnalysis.linkWork(nres)
 	print "Ending Link Analysis.. Converting JSON to CSV.."
 	json2csv.csvConvert()
 	print "Starting LDA Analysis per Channel.."
