@@ -11,9 +11,9 @@ YOUTUBE_API_VERSION = "v3"
 # Authorization for using the Youtube API v3
 youtube = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION,developerKey=DEVELOPER_KEY)
 
-def youtube_search(q, token, res, max_results=50,order="relevance",  location=None, location_radius=None):
+def youtube_search(q, token,numOfResults, res,order="relevance",  location=None, location_radius=None):
     # change res to number of results required
-    if len(res) >= 900:
+    if len(res) >= int(numOfResults):
         return
 
     search_response = youtube.search().list(
@@ -21,22 +21,21 @@ def youtube_search(q, token, res, max_results=50,order="relevance",  location=No
     type="video",
     pageToken=token,
     order = order,
-    part="id,snippet",  
-    maxResults=max_results,
+    part="id,snippet",
     location=location,
     locationRadius=location_radius).execute()
 
     for search_result in search_response.get("items", []):
     	res.append(search_result)
         
-    youtube_search("make money through clicking", search_response.get("nextPageToken"), res)
+    youtube_search(q, search_response.get("nextPageToken"), numOfResults, res)
 
-if __name__=="__main__":
+def search(query,numOfResults):
     #res is the list of results
     res = []
     
     # Change search query to the required query by changing the first argument of this function
-    youtube_search("make money through clicking", None,res)
+    youtube_search(query, None,numOfResults,res)
     
     title = []
     channelId = []
@@ -52,11 +51,11 @@ if __name__=="__main__":
     description = []
 
     chan = {}
-
+    print len(res)
     count = 0.0
     for search_result in res:
         count += 1.0
-        print str(100*(count/900.0))[:4]+'%'
+        print str(100*(count/float(numOfResults)))[:4]+'%'
         title.append(search_result['snippet']['title']) 
 
         videoId.append(search_result['id']['videoId'])
@@ -118,5 +117,5 @@ if __name__=="__main__":
     with open('buffer.json', 'w') as fp:
         json.dump(youtube_dict, fp)
    
-    # with open('VideosPerChannel.json', 'w') as fp:
-    #     json.dump(chan, fp)
+    with open('VideosPerChannelBuffer.json', 'w') as fp:
+        json.dump(chan, fp)

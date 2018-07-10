@@ -76,5 +76,5 @@ x['linksUp'] = linksUp
 x['linksDownCount']=linksDownCount
 x['classification']=classification
 
-with open('csvdata.json', 'w') as fp:
+with open('linkAnalysis.json', 'w') as fp:
 	json.dump(x,fp)
