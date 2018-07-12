@@ -1,7 +1,7 @@
 import json
 
 def checkKeywords():
-	data = json.load(open('ldaonTitleDescriptionTagsResultsBuffer.json'))
+	data = json.load(open('ldaonTitleDescriptionTagsResults.json'))
 	fraudChannelsTitle = {}
 	fraudChannelsDescription = {}
 	fraudChannelsTag = {}

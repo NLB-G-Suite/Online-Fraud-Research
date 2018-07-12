@@ -9,7 +9,7 @@ def findPercentage():
 	uniqueChan = []
 	countDict = {}
 	wordList = ['click','scam','profit click','profitclick','ad ',' ads',' ad ','advertis',' ad-','fraud','clickbank','per','pay','adclick']
-	data = json.load(open('tagsDescriptionsTitleChannelBuffer.json'))
+	data = json.load(open('tagsDescriptionsTitleChannel.json'))
 
 
 	for channel in titles:
@@ -24,49 +24,77 @@ def findPercentage():
 			uniqueChan.append(channel)
 
 	for channels in uniqueChan:
-		countDict[channels] = [0.0,[]]
-		# for video in allChannelVideos[channel]:
-		# 	if ((' Ad ' in video[0] or ' Ad-' in video[0] or' ad ' in video[0] or ' ad-' in video[0]) and ('Click' in video[0] or 'click' in video[0])) or 'Click' in video[0] or 'click' in video[0]:
-		# 		countDict[channel] += 1.0
+		countDict[channels] = [0,{}]
+		flagDict = {}
 		try:
 			flag = 0
 			for video in data[channels]:
+				flagDict[video] = {}
+				wordFreq = {}
 				for word in wordList:
 					if word in data[channels][video]['title'].lower():
-						flag += 1
+						flag +=1
+						if word in wordFreq:
+							wordFreq[word] += 1
+						else:
+							wordFreq[word] = 1
+				if len(wordFreq):
+					flagDict[video]['title'] = wordFreq
 				if flag >= 2:
-					countDict[channels][0] += 1.0
-					countDict[channels][1].append(video)
+					countDict[channels][0] += 1
 		except Exception,e:
 			print str(e) 
-
 		try:
 			flag = 0
 			for video in data[channels]:
+				wordFreq = {}
 				for word in wordList:
 					if word in data[channels][video]['description'].lower():
-						flag += 1
-				if video not in countDict[channels][1] and flag >= 2:
-					countDict[channels][0] += 1.0
-					countDict[channels][1].append(video)
+						flag +=1
+						if word in wordFreq:
+							wordFreq[word] += 1
+						else:
+							wordFreq[word] = 1
+				if len(wordFreq):
+					flagDict[video]['description'] = wordFreq
+				if video not in flagDict and flag >= 2:
+					countDict[channels][0] += 1
 		except Exception,e:
-			print str(e)  
-
+			print str(e)
 		try:
 			flag = 0
 			for video in data[channels]:
-				for word in wordList:
-					if word in data[channels][video]['tags']:
-						flag += 1
-				if video not in countDict[channels][1] and flag >= 2:
-					countDict[channels][0] += 1.0
-					countDict[channels][1].append(video)
+				wordFreq = {}
+				for tag in data[channels][video]['tags']:
+					for word in wordList:
+						if word in tag.lower():
+							flag +=1
+							if word in wordFreq:
+								wordFreq[word] += 1
+							else:
+								wordFreq[word] = 1
+				if len(wordFreq):
+					flagDict[video]['tags'] = wordFreq
+				if video not in flagDict and flag >= 2:
+					countDict[channels][0] += 1
 		except Exception,e:
 			print str(e)
+		if len(flagDict):
+			countDict[channels][1] = flagDict
+
+	cleanDict = {}
+	for channel in countDict:
+		if countDict[channel][0] > 0:
+			cleanDict[channel] = [0,{}]
+			cleanDict[channel][0] = countDict[channel][0]
+			for video in countDict[channel][1]:
+				if len(countDict[channel][1][video]):
+					cleanDict[channel][1][video] = countDict[channel][1][video]
+	countDict = cleanDict
 
 	mainDict = {}
 	for channel in countDict:
-		mainDict[channel] = (countDict[channel][0],len(data[channel]),(countDict[channel][0]/len(data[channel])) * 100)
+		mainDict[channel] = (countDict[channel][0],len(data[channel]),(float(countDict[channel][0])/len(data[channel])) * 100)
 
 	with open('PercentageFraudPerUserBuffer.json', 'w') as f:
 		json.dump(mainDict, f)
