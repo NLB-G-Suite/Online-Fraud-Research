@@ -22,7 +22,7 @@ def runLda():
 	# doc_e = "Health professionals say that brocolli is good for your health." 
 
 	videosPerUser=[]
-	data = json.load(open('tagsDescriptionsTitleChannelBuffer.json'))
+	data = json.load(open('tagsDescriptionsTitleChannel.json'))
 
 	# print doc_set
 	# compile sample documents into a list
@@ -152,14 +152,8 @@ def runLda():
 
 			dict[channels]['tags'] = ldaAns
 
-			# temp+=str(channels)+': '+str(ldaAns)+'\n'
-			# print temp
 		except Exception,e:
 			print str(e)
 
-	with open('ldaonTitleDescriptionTagsResultsBuffer.json', 'w') as f:
+	with open('ldaonTitleDescriptionTagsResults.json', 'w') as f:
 	        json.dump(dict, f)
-	# with open('ldaTitleResultsBuffer.txt','w') as f:
-	# 	f.write(temp)
-		
-	# print 'Done'

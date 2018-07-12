@@ -47,11 +47,11 @@ def potentialFraud():
 		except Exception,e:
 			print str(e)
 			
-	with open('ldaOn_ad_clickTitlesBuffer.json','w') as f:
+	with open('ldaOn_ad_clickTitles.json','w') as f:
 		json.dump(fraudChannelsTitle,f)
 
-	with open('ldaOn_ad_clickDescriptionBuffer.json','w') as f:
+	with open('ldaOn_ad_clickDescription.json','w') as f:
 		json.dump(fraudChannelsDescription,f)
 
-	with open('ldaOn_ad_clickTagBuffer.json','w') as f:
+	with open('ldaOn_ad_clickTag.json','w') as f:
 		json.dump(fraudChannelsTag,f)

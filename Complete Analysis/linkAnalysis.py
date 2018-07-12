@@ -6,7 +6,7 @@ import urllib2
 import httplib2
 
 def linkWork(nres):
-	x = json.load(open('buffer.json'))
+	x = json.load(open('crawlerResult.json'))
 
 	links=[]
 	linksCount=[]
@@ -77,5 +77,5 @@ def linkWork(nres):
 	x['linksDownCount']=linksDownCount
 	x['classification']=classification
 
-	with open('csvdataBuffer.json', 'w') as fp:
+	with open('linkStatus.json', 'w') as fp:
 		json.dump(x,fp)

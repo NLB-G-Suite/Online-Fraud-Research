@@ -2,8 +2,8 @@ import json
 import csv
 
 def csvConvert():
-	x = json.load(open('csvdataBuffer.json'))
-	f = csv.writer(open("testBuffer.csv", "wb+"))
+	x = json.load(open('linkStatus.json'))
+	f = csv.writer(open("linkStatus.csv", "wb+"))
 
 	f.writerow(
 				['videoId',

@@ -1,9 +1,9 @@
 import json
 import csv 
 def findPercentage():
-	titles = json.load(open('ldaOn_ad_clickTitlesBuffer.json'))
-	descs = json.load(open('ldaOn_ad_clickDescriptionBuffer.json'))
-	tags = json.load(open('ldaOn_ad_clickTagBuffer.json'))
+	titles = json.load(open('ldaOn_ad_clickTitles.json'))
+	descs = json.load(open('ldaOn_ad_clickDescription.json'))
+	tags = json.load(open('ldaOn_ad_clickTag.json'))
 
 	uniqueChan = []
 	countDict = {}
@@ -105,9 +105,9 @@ def findPercentage():
 	for channel in countDict:
 		mainDict[channel] = (countDict[channel][0],len(data[channel]),(float(countDict[channel][0])/len(data[channel])) * 100)
 
-	with open('PercentageFraudPerUserBuffer.json', 'w') as f:
+	with open('PercentageFraudPerUser.json', 'w') as f:
 		json.dump(mainDict, f)
-	with open('fraudUserVideosBuffer.json', 'w') as f:
+	with open('fraudUserVideos.json', 'w') as f:
 		json.dump(countDict, f)
 
 	with open("FraudChannels.csv", "wb+") as file:

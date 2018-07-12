@@ -114,8 +114,8 @@ def search(query,numOfResults):
             commentCount.append("No commentCount")
     youtube_dict = {'description': description, 'tags': tags,'channelId': channelId,'channelTitle': channelTitle,'categoryId':categoryId,'title':title,'videoId':videoId,'viewCount':viewCount,'commentCount':commentCount, 'comments': comments}
 
-    with open('buffer.json', 'w') as fp:
+    with open('crawlerResult.json', 'w') as fp:
         json.dump(youtube_dict, fp)
    
-    with open('VideosPerChannelBuffer.json', 'w') as fp:
+    with open('VideosPerChannel.json', 'w') as fp:
         json.dump(chan, fp)

@@ -7,7 +7,7 @@ import urllib2
 #-----------------------------------------------------------------------------------------------------------
 def makeDict():
 	mainDict = {}
-	data = json.load(open('VideosPerChannelBuffer.json'))
+	data = json.load(open('VideosPerChannel.json'))
 	tcount = 0
 	for channel in data:
 		for id in data[channel]:
@@ -54,7 +54,7 @@ def makeDict():
 			count += 1.0
 			mainDict[channel][id[1][32:]] = videoDict
 		print str(100*(count/tcount))[:4]+'% Complete'
-	with open('tagsDescriptionsTitleChannelBuffer.json','w') as f:
+	with open('tagsDescriptionsTitleChannel.json','w') as f:
 		json.dump(mainDict,f)
 
 #--------------------------------------------------------------------------------------------------------
