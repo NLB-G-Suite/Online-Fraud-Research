@@ -1,6 +1,5 @@
 import json
-
-
+import csv 
 def findPercentage():
 	titles = json.load(open('ldaOn_ad_clickTitlesBuffer.json'))
 	descs = json.load(open('ldaOn_ad_clickDescriptionBuffer.json'))
@@ -30,14 +29,19 @@ def findPercentage():
 			flag = 0
 			for video in data[channels]:
 				flagDict[video] = {}
+				flagDict[video]['title'] = 'NoFlag'
+				flagDict[video]['description'] = 'NoFlag'
+				flagDict[video]['tags'] = 'NoFlag'
 				wordFreq = {}
 				for word in wordList:
 					if word in data[channels][video]['title'].lower():
 						flag +=1
-						if word in wordFreq:
-							wordFreq[word] += 1
-						else:
-							wordFreq[word] = 1
+					for tWord in data[channels][video]['title'].lower().split():
+						if word in tWord:
+							if word in wordFreq:
+								wordFreq[word] += 1
+							else:
+								wordFreq[word] = 1
 				if len(wordFreq):
 					flagDict[video]['title'] = wordFreq
 				if flag >= 2:
@@ -51,10 +55,12 @@ def findPercentage():
 				for word in wordList:
 					if word in data[channels][video]['description'].lower():
 						flag +=1
-						if word in wordFreq:
-							wordFreq[word] += 1
-						else:
-							wordFreq[word] = 1
+					for dWord in data[channels][video]['description'].lower().split():
+						if word in dWord:
+							if word in wordFreq:
+								wordFreq[word] += 1
+							else:
+								wordFreq[word] = 1
 				if len(wordFreq):
 					flagDict[video]['description'] = wordFreq
 				if video not in flagDict and flag >= 2:
@@ -65,10 +71,13 @@ def findPercentage():
 			flag = 0
 			for video in data[channels]:
 				wordFreq = {}
-				for tag in data[channels][video]['tags']:
-					for word in wordList:
+				for word in wordList:
+					check = 1
+					for tag in data[channels][video]['tags']:
 						if word in tag.lower():
-							flag +=1
+							if check:
+								flag +=1
+								check = 0
 							if word in wordFreq:
 								wordFreq[word] += 1
 							else:
@@ -88,7 +97,7 @@ def findPercentage():
 			cleanDict[channel] = [0,{}]
 			cleanDict[channel][0] = countDict[channel][0]
 			for video in countDict[channel][1]:
-				if len(countDict[channel][1][video]):
+				if len(countDict[channel][1][video]['description']) or len(countDict[channel][1][video]['tags']) or len(countDict[channel][1][video]['title']):
 					cleanDict[channel][1][video] = countDict[channel][1][video]
 	countDict = cleanDict
 
@@ -99,10 +108,60 @@ def findPercentage():
 	with open('PercentageFraudPerUserBuffer.json', 'w') as f:
 		json.dump(mainDict, f)
 	with open('fraudUserVideosBuffer.json', 'w') as f:
-		json.dump(countDict, f)	
+		json.dump(countDict, f)
 
-	temp = 'Channel Hyperlink: (Fraudulent Videos, Total Videos, Percentage Fraudulent)\n\n'
-	for channel in mainDict:
-		temp += 'https://www.youtube.com/channel/'+str(channel)+': '+str(mainDict[channel])+'\n'
-	with open('PercentageFraudPerUserBuffer.txt','w') as f:
-		f.write(temp)
+	with open("FraudChannels.csv", "wb+") as file:
+		f = csv.writer(file)
+		f.writerow(
+					['Channels',
+					'FraudVideoCount',
+					'Videos',
+					'TitleFlag',
+					'TagFlag',
+					'DescriptionFlag'
+				])
+
+		for channel in countDict:
+			check = 1
+			for video in countDict[channel][1]:
+				try:
+					if check == 1:
+						if 'title' in countDict[channel][1][video] and 'description' in countDict[channel][1][video] and 'tags' in countDict[channel][1][video]:
+							f.writerow(
+								['https://www.youtube.com/'+channel,
+								countDict[channel][0],
+								'https://www.youtube.com/watch?v='+video,
+								countDict[channel][1][video]['title'],
+								countDict[channel][1][video]['tags'],
+								countDict[channel][1][video]['description']
+							])
+						check = 0
+					else:
+						if 'title' in countDict[channel][1][video] and 'description' in countDict[channel][1][video] and 'tags' in countDict[channel][1][video]:
+							f.writerow(
+								[' ',
+								' ',
+								'https://www.youtube.com/watch?v='+video,
+								countDict[channel][1][video]['title'],
+								countDict[channel][1][video]['tags'],
+								countDict[channel][1][video]['description']
+							])
+				except Exception,e:
+					print str(e)
+
+	with open("PercentageFraudChannel.csv", "wb") as file:
+		f = csv.writer(file)
+		f.writerow([
+			'Channel Hyperlink',
+			'Fraudulent Videos',
+			'Total Videos',
+			'Percentage Fraudulent'
+			])
+		for channel in mainDict:
+			f.writerow([
+				'https://www.youtube.com/channel/'+channel,
+				mainDict[channel][0],
+				mainDict[channel][1],
+				str(mainDict[channel][2])+'%'
+			])
+
