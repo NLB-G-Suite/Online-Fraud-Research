@@ -1,0 +1,148 @@
+URL,Detected,True/False Positive
+http://moonbit.co.in/,"{u'Quttera': u'malicious site', u'DNS8': u'malicious site'}",True Positive
+http://amzn.to/22mmlqr,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2arYRuS,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/22mlVjS,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+https://www.adsok.com/en/register?referral=3XYoaAZ,{u'Kaspersky': u'phishing site'},True Positive
+http://amzn.to/2fByyuf,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2z4ypUr,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2e8vQLj,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/vlnVbV,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://30385716.earntalktime.com/,{u'Avira': u'malware site'},True Positive
+http://amzn.to/2k7EHv1,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2iR6E9f,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2jvwgKJ,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://www.amazon.com/,{u'CLEAN MX': u'phishing site'},False Positive
+https://za.gl/ref/GauravAgarwal,{u'Avira': u'malware site'},True Positive
+https://cuon.io/tCgh5,{u'Sucuri SiteCheck': u'malicious site'},True Positive
+https://yeheey.biz/auth/register/member?id=aizamercado6666,{u'Malwarebytes hpHosts': u'malware site'},True Positive
+https://payhip.com/,{u'DNS8': u'malicious site'},True Positive
+http://adf.ly/1QxUKD,{u'AutoShun': u'malicious site'},False Positive
+https://www.facebook.com/profile.php?id=100013583492983,{u'Antiy-AVL': u'malicious site'},True Positive
+http://www.tamooracademy.com/,{u'BitDefender': u'phishing site'},True Positive
+https://za.gl/ref/sanjayb188,{u'Avira': u'malware site'},True Positive
+http://ipasmillionaire.com/pre/?id=31307&tid=yout,{u'Forcepoint ThreatSeeker': u'phishing site'},True Positive
+http://adf.ly/1ZJR8A,{u'AutoShun': u'malicious site'},False Positive
+http://www.bit.do/mydollar,{u'AutoShun': u'malicious site'},True Positive
+https://freebitco.in/?r=1918639,{u'Sucuri SiteCheck': u'malicious site'},True Positive
+https://amzn.to/2KLUAV6,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+https://amzn.to/2s1VKVD,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+https://amzn.to/2s8qwwf,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+https://amzn.to/2KLVpgz,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://www.xyz.com/,{u'Sucuri SiteCheck': u'malicious site'},True Positive
+http://adf.ly/?id=3238346,{u'AutoShun': u'malicious site'},False Positive
+http://adf.ly/IYCHa,{u'AutoShun': u'malicious site'},False Positive
+http://www.drostdesigns.com/youtube-hijack,{u'Sucuri SiteCheck': u'malicious site'},True Positive
+http://www.bit.do/20ads,{u'AutoShun': u'malicious site'},True Positive
+http://www.fiverr.com/,{u'CLEAN MX': u'phishing site'},True Positive
+http://amzn.to/2FaJFGa,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2F8gUKa,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2H2PhyM,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2CWDLTa,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://adf.ly/1QxZbn,{u'AutoShun': u'malicious site'},False Positive
+http://amzn.to/2vf0Ssu,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2v4INNk,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://www.bit.do/earnbit,{u'AutoShun': u'malicious site'},True Positive
+https://freebitco.in/?r=2390321,{u'Sucuri SiteCheck': u'malicious site'},True Positive
+https://browser.mcent.com/r/nvauow9mSPWSMvjV3uDfag,{u'Avira': u'malware site'},True Positive
+http://amzn.to/2jfpdVx,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2kCz1xO,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2kCFBUU,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2lxDG3f,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/1I9IjYd,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/1QImkuq,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/1QImDp4,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/1QImSk9,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://ahumoney.site/9133823455632/,{u'Kaspersky': u'phishing site'},True Positive
+http://10kwithscott.com/Who-Is-Scott,{u'Emsisoft': u'phishing site'},True Positive
+http://adf.ly/8Gu5N,{u'AutoShun': u'malicious site'},False Positive
+http://adf.ly/8BkGV,{u'AutoShun': u'malicious site'},False Positive
+http://adf.ly/,{u'AutoShun': u'malicious site'},False Positive
+http://amzn.to/2x9pRum,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2wfxanY,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2wfgkWa,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2w6RyXQ,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2ft24AK,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://za.gl/bZt1b,{u'Avira': u'malware site'},True Positive
+http://attotrade.com/?code=4HMQ5X8CF4,{u'Fortinet': u'malware site'},True Positive
+http://www.gamerfuzion.com/,{u'Fortinet': u'malware site'},True Positive
+https://adf.ly/,{u'AutoShun': u'malicious site'},False Positive
+https://freebitco.in/?r=2856122,{u'Sucuri SiteCheck': u'malicious site'},True Positive
+http://amzn.to/2gnpJQy,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2veRfKE,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+https://amzn.to/2GoKlZ1,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://adf.ly/1dBM3b,{u'AutoShun': u'malicious site'},False Positive
+https://ref.adbtc.top/203610,{u'Emsisoft': u'phishing site'},True Positive
+http://amzn.to/2kDxPVY,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+https://amzn.to/2GICfFT,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2mR7DJD,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2mvVaic,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2nVr84s,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2mw9UgQ,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2naSOlQ,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://exemoney.club/8543047233025/,{u'Kaspersky': u'phishing site'},True Positive
+http://adf.ly/1boPgu,{u'AutoShun': u'malicious site'},False Positive
+http://amazon.com/,{u'CLEAN MX': u'phishing site'},False Positive
+http://yeheey.biz/,"{u'Quttera': u'malicious site', u'Malwarebytes hpHosts': u'malware site'}",True Positive
+http://www.bit.do/earn2017,{u'AutoShun': u'malicious site'},True Positive
+http://amzn.to/2FaJNWa,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2oOqJlG,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2oH0tu7,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+https://fleex.cc/ref/gua143,{u'Fortinet': u'malware site'},True Positive
+http://on.fb.me/1y8M8ax,{u'Sucuri SiteCheck': u'malicious site'},True Positive
+https://amzn.to/2GbVnvV,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+https://amzn.to/2rEHqC5,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2cuibbO,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2c8MUzf,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2dfcelj,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2m9JRv7,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2mB9F0B,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2lvepnD,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2l8sECp,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2kMo9cE,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2lmBiMY,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+https://coinbucks.io/,{u'Forcepoint ThreatSeeker': u'malicious site'},True Positive
+https://www.fiverr.com/,{u'CLEAN MX': u'phishing site'},True Positive
+http://on.fb.me/1bREArV,{u'Sucuri SiteCheck': u'malicious site'},True Positive
+http://amzn.to/2gmicjP,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/1TpZPvO,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/1Twft7Y,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2gmjnjn,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2xBJG2i,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2z42gw0,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/29lUkcs,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/20s1JLH,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://steamcommunity.com/,{u'CLEAN MX': u'phishing site'},True Positive
+http://amzn.to/2vNDfVs,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2vIbu24,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2x9iW4s,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2wUXd0P,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+https://freebitco.in/?r=2519128,{u'Sucuri SiteCheck': u'malicious site'},True Positive
+http://adf.ly/1o3CVb,{u'AutoShun': u'malicious site'},False Positive
+http://adf.ly/IYBq7,{u'AutoShun': u'malicious site'},False Positive
+http://adf.ly/,{u'AutoShun': u'malicious site'},False Positive
+http://amzn.to/2kMEHB6,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://za.gl/,"{u'CyRadar': u'malicious site', u'Avira': u'malware site', u'BitDefender': u'phishing site'}",True Positive
+https://za.gl/ref/techrohitinfo,{u'Avira': u'malware site'},True Positive
+http://za.gl/wNKiQd,{u'Avira': u'malware site'},True Positive
+http://za.gl/,"{u'CyRadar': u'malicious site', u'Avira': u'malware site', u'BitDefender': u'phishing site'}",True Positive
+http://adf.ly/8BQ0E,{u'AutoShun': u'malicious site'},False Positive
+http://adf.ly/17pmYt,{u'AutoShun': u'malicious site'},False Positive
+http://amzn.to/2m4SJ2d,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/1Punfvr,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://www.capchaclub.com/,{u'Fortinet': u'malware site'},True Positive
+http://sgseducation.com/,{u'Sophos': u'malicious site'},True Positive
+http://amzn.to/2kDRN6Y,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2kwgNwU,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2kyRvOC,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2nVfCpC,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2naNjUj,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2mwgjIX,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2nV1Sv7,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://faucethub.io/r/2178704,{u'DNS8': u'malicious site'},True Positive
+http://adf.ly/,{u'AutoShun': u'malicious site'},False Positive
+http://www.moneymail.in/,{u'BitDefender': u'phishing site'},True Positive
+http://www.paisalive.com/,{u'CLEAN MX': u'phishing site'},True Positive
+http://amzn.to/2lSWZSL,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2m9OIfN,{u'Sucuri SiteCheck': u'malicious site'},False Positive
+http://amzn.to/2ljO2RV,{u'Sucuri SiteCheck': u'malicious site'},False Positive
