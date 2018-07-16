@@ -3,11 +3,37 @@ import csv
 import re
 import url
 import urllib2
+import threading
 import httplib2
 
-def linkWork(nres):
-	x = json.load(open('crawlerResult.json'))
+uniqueLinks = []
+lock=0
+linkResults = {}
+threadLock = threading.Lock()
 
+def multiLinkCheck(links,i):
+	global uniqueLinks
+	global lock
+	global linkResults
+	global threadLock
+	threadLock.acquire()
+	print "Thread:",i
+	threadLock.release()
+	for link in links:
+		temp = url.active(link,i)
+		threadLock.acquire()
+		linkResults[link] = temp
+		threadLock.release()
+	threadLock.acquire()
+	lock+=1
+	print "LOCK UPDATED",lock
+	threadLock.release()
+
+def linkWork():
+	print "I AM HERE"
+	global uniqueLinks
+	global lock
+	global linkResults
 	links=[]
 	linksCount=[]
 	category=[]
@@ -17,12 +43,13 @@ def linkWork(nres):
 	classification=[]
 
 	notclassified=0
+	x = json.load(open('crawlerResult.json'))
 
 	count=0.0
 	h = httplib2.Http(timeout=60)
 	for i in range(len(x['videoId'])):
 		count += 1.0
-		print str(100*(count/float(nres)))[:4]+'%'
+		print str(100*(count/float(923)))[:4]+'%'
 
 		classify=0
 		title=x['title'][i].encode('ascii','ignore')
@@ -39,17 +66,23 @@ def linkWork(nres):
 				notclassified+=1
 				classification.append('Not classified')
 
-		linkList=url.check(x['description'][i]+' ')
+		
 		inactive=0
 		videoLinksUp = []
 		videoLinksDown = []
-		for link in linkList:
-			result = url.active(link,h)
-			if result =='not active':
-				inactive+=1
-				videoLinksDown.append(link)
-			else:
-				videoLinksUp.append(link)
+		linksDownError={}
+		# for i in range(len(x['videoId'])):
+		linkList=url.check(x['description'][i]+' ')
+		if linkList != None:
+			# continue
+			for link in linkList:
+				if linkResults[link] != 'active':
+					inactive+=1
+					linksDownError[link]=linkResults[link]
+					videoLinksDown.append(linksDownError)
+				else:
+					videoLinksUp.append(link)
+
 		linksDownCount.append(inactive)
 		linksDown.append(videoLinksDown)
 		linksUp.append(videoLinksUp)
@@ -77,5 +110,32 @@ def linkWork(nres):
 	x['linksDownCount']=linksDownCount
 	x['classification']=classification
 
-	with open('linkStatus.json', 'w') as fp:
+	with open('linkStatusBuffer.json', 'w') as fp:
 		json.dump(x,fp)
+
+
+def main():
+	global uniqueLinks
+	global linkResults
+	global lock
+	x = json.load(open('crawlerResult.json'))
+	for i in range(len(x['videoId'])):
+		linkList=url.check(x['description'][i]+' ')
+		if linkList == None:
+			continue
+		else:
+			for link in linkList:
+				if link not in uniqueLinks:
+					uniqueLinks.append(link)
+	parts = len(uniqueLinks)/20
+	for i in range(19):
+		t = threading.Thread(target=multiLinkCheck,args=(uniqueLinks[i*parts:(i+1)*parts],i))
+		t.start()
+	t = threading.Thread(target=multiLinkCheck,args=(uniqueLinks[19*parts:],19))
+	t.start()
+	while(lock<20):
+		continue
+	linkWork()
+
+if __name__=='__main__':
+	main()
