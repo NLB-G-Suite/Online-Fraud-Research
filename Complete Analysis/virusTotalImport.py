@@ -23,13 +23,13 @@ for list in virusTotal.values():
 			print str(e)
 total = []
 for i in range(len(data['videoId'])):
-	maliciousLinks=[]
+	maliciousLinks={}
 	check=0
 	for link in data['linksUp'][i]:
 		if link in url:
-			maliciousLinks.append(url[link])
+			maliciousLinks[link] = url[link]
 		else:
-			maliciousLinks.append({'result':'unknown'})
+			maliciousLinks[link] = {'result':'unknown'}
 	total.append(maliciousLinks)
 data['scannedLink'] = total
 

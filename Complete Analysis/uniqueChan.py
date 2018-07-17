@@ -9,6 +9,7 @@ def findPercentage():
 	countDict = {}
 	wordList = ['click','scam','profit click','profitclick','ad ',' ads',' ad ','advertis',' ad-','fraud','clickbank','per','pay','adclick']
 	data = json.load(open('tagsDescriptionsTitleChannel.json'))
+	linkAndData = json.load(open('linkStatusBuffer.json'))
 
 
 	for channel in titles:
