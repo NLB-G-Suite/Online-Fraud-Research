@@ -30,7 +30,6 @@ def multiLinkCheck(links,i):
 	threadLock.release()
 
 def linkWork():
-	print "I AM HERE"
 	global uniqueLinks
 	global lock
 	global linkResults
