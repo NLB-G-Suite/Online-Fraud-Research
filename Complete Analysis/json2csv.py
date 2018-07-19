@@ -2,8 +2,9 @@ import json
 import csv
 
 def csvConvert():
-	x = json.load(open('linkStatus.json'))
-	f = csv.writer(open("linkStatus.csv", "wb+"))
+	x = json.load(open('linkStatusBuffer.json'))
+	Scores = json.load(open('sampleClassifier.json'))
+	f = csv.writer(open("linkStatusBufferGithub.csv", "wb+"))
 
 	f.writerow(
 				['videoId',
@@ -20,7 +21,8 @@ def csvConvert():
 				'linksCount',
 				'linksDownCount',
 				'linksDown',
-				'linksUp'
+				'linksUp',
+				'FraudScore'
 			])
 
 	for i in range(len(x['videoId'])):
@@ -40,7 +42,9 @@ def csvConvert():
 				x['linksCount'][i],
 				x['linksDownCount'][i],
 				x['linksDown'][i],
-				x['linksUp'][i]
+				x['linksUp'][i],
+				Scores[x['videoId'][i]]
 			])
 		except Exception,e:
 			print str(e)
+csvConvert()
