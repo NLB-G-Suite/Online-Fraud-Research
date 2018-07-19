@@ -57,7 +57,7 @@ def findPercentage():
 		'bigtimebux': 10,
 		'adclickxpress': 10,
 	}
-	data = json.load(open('linkStatusBufferGithub.json'))
+	data = json.load(open('linkStatusBuffer.json'))
 	data['classification'] = []
 	suspect = {}
 
@@ -83,7 +83,7 @@ def findPercentage():
 			wordFreq = {}
 			for word in wordList:
 				# if word in data['ldaDescriptionResults'][i]:
-				if word in data['ldaDescription'][i]:
+				if word in data['ldaDescriptionResults'][i]:
 					flag +=1*wordList[word]
 				# for tWord in data['ldaDescriptionResults'][i].lower().split():
 
