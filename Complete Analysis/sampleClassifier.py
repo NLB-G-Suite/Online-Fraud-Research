@@ -13,6 +13,8 @@ def findPercentage():
 	combinations = [
 		['paid','to','click'],
 		['ad','click'],
+		['ad','view','money'],
+		['app','click','own'],
 		['admob','vpn'],
 		['admob','self','click'],
 		['earn','click',' ad'],
@@ -65,16 +67,16 @@ def findPercentage():
 		try:
 			flag = 0
 			wordFreq = {}
+			for words in combinations:
+				definiteFraud = 0
+				for sensitive in words:
+					if sensitive in data['title'][i].lower():
+						definiteFraud += 1
+				if definiteFraud == len(words):
+					flag += 20
 			for word in wordList:
 				if word in data['title'][i]:
 					flag +=1*wordList[word]
-				for words in combinations:
-					definiteFraud = 0
-					for sensitive in words:
-						if sensitive in data['tite'][i]:
-							definiteFraud += 1
-					if definiteFraud == len(words):
-						flag += 20
 				for tWord in data['title'][i].lower().split():
 					if word in tWord:
 						if word in wordFreq:
