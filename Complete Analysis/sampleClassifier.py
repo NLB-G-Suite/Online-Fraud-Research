@@ -11,13 +11,13 @@ def findPercentage():
 	countDict = {}
 	
 	combinations = [
-		['pay','per','click'],
 		['paid','to','click'],
 		['ad','click'],
 		['admob','vpn'],
 		['admob','self','click'],
 		['earn','click',' ad'],
-		['money','click',' ad']
+		['money','click',' ad'],
+		['self','click']
 	]
 	wordList = {
 		'per': 1,
@@ -68,6 +68,13 @@ def findPercentage():
 			for word in wordList:
 				if word in data['title'][i]:
 					flag +=1*wordList[word]
+				for words in combinations:
+					definiteFraud = 0
+					for sensitive in words:
+						if sensitive in data['tite'][i]:
+							definiteFraud += 1
+					if definiteFraud == len(words):
+						flag += 20
 				for tWord in data['title'][i].lower().split():
 					if word in tWord:
 						if word in wordFreq:
