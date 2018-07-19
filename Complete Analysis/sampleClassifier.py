@@ -19,7 +19,7 @@ def findPercentage():
 		['earn','click',' ad'],
 		['money','click',' ad']
 	]
-	sensitiveWords = {
+	wordList = {
 		'per': 1,
 		'pay': 1,
 		'link': 1,
@@ -57,7 +57,7 @@ def findPercentage():
 		'bigtimebux': 10,
 		'adclickxpress': 10,
 	}
-	data = json.load(open('linkStatusBuffer.json'))
+	data = json.load(open('linkStatusBufferGithub.json'))
 	data['classification'] = []
 	suspect = {}
 
@@ -67,7 +67,7 @@ def findPercentage():
 			wordFreq = {}
 			for word in wordList:
 				if word in data['title'][i]:
-					flag +=1
+					flag +=1*wordList[word]
 				for tWord in data['title'][i].lower().split():
 					if word in tWord:
 						if word in wordFreq:
@@ -82,9 +82,12 @@ def findPercentage():
 			flag = 0
 			wordFreq = {}
 			for word in wordList:
-				if word in data['ldaDescriptionResults'][i]:
-					flag +=1
-				for tWord in data['description'][i].lower().split():
+				# if word in data['ldaDescriptionResults'][i]:
+				if word in data['ldaDescription'][i]:
+					flag +=1*wordList[word]
+				# for tWord in data['ldaDescriptionResults'][i].lower().split():
+
+				for tWord in data['description'][i]:
 					if word in tWord:
 						if word in wordFreq:
 							wordFreq[word] += 1
@@ -101,7 +104,7 @@ def findPercentage():
 				for tag in data['tags'][i]:
 					if word in tag.lower():
 						if check:
-							flag +=1
+							flag += wordList[word]
 							check = 0
 						if word in wordFreq:
 							wordFreq[word] += 1
@@ -114,18 +117,17 @@ def findPercentage():
 			flag = 0
 			if len(data['linksDown'][i]):
 				uniqueLinks = []
-				for links in data['linksDown'][i]:
-					for link in links:
-						if link not in uniqueLinks:
-							uniqueLinks.append(link)
-							flag += 3
+				for link in data['linksDown'][i]:
+					if link not in uniqueLinks:
+						uniqueLinks.append(link)
+						flag += 4
 				# print flag
 			if len(data['linksUp'][i]):
 				uniqueLinks = []
 				for link in data['scannedLink'][i]:
 					if link not in uniqueLinks and 'result' not in data['scannedLink'][i][link]:
 						uniqueLinks.append(link)
-						flag += 3
+						flag += 10
 			suspect[data['videoId'][i]].append([flag,[]])
 		except Exception,e:
 			print str(e)

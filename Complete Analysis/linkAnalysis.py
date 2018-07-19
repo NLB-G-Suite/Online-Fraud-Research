@@ -75,10 +75,10 @@ def linkWork():
 		if linkList != None:
 			# continue
 			for link in linkList:
-				if linkResults[link] != 'active':
+				if linkResults[link][1] != 'active':
 					inactive+=1
-					linksDownError[link]=linkResults[link]
-					videoLinksDown.append(linksDownError)
+					# linksDownError[link]=linkResults[link]
+					videoLinksDown.append(linkResults[link])
 				else:
 					videoLinksUp.append(link)
 
