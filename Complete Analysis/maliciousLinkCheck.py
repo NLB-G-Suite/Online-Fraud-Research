@@ -2,12 +2,12 @@ import requests
 import json
 
 # submitResponse=[]
-# def submitURL(urlList,API_KEY):
-# 	params = {'apikey': API_KEY, 'url':urlList[0] + '\n'}
-# 	for url in urlList[1:]:
-# 		params['url'] += url+'\n'
-# 	params['url'] = params['url'][:-1]
-# 	response = requests.post('https://www.virustotal.com/vtapi/v2/url/scan', data=params)
+def submitURL(urlList,API_KEY):
+	params = {'apikey': API_KEY, 'url':urlList[0] + '\n'}
+	for url in urlList[1:]:
+		params['url'] += url+'\n'
+	params['url'] = params['url'][:-1]
+	response = requests.post('https://www.virustotal.com/vtapi/v2/url/scan', data=params)
 
 def getReports(urlList,API_KEY):
 	headers = {

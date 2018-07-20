@@ -80,7 +80,7 @@ def linkWork():
 					# linksDownError[link]=linkResults[link]
 					videoLinksDown.append(linkResults[link])
 				else:
-					videoLinksUp.append(link)
+					videoLinksUp.append(linkResults[link][0])
 
 		linksDownCount.append(inactive)
 		linksDown.append(videoLinksDown)
@@ -109,7 +109,7 @@ def linkWork():
 	x['linksDownCount']=linksDownCount
 	x['classification']=classification
 
-	with open('linkStatusBuffer.json', 'w') as fp:
+	with open('linkStatusBuffer(1).json', 'w') as fp:
 		json.dump(x,fp)
 
 

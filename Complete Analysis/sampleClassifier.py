@@ -14,6 +14,7 @@ def findPercentage():
 		['paid','to','click'],
 		['ad','click'],
 		['ad','view','money'],
+		['ad','watch','money'],
 		['app','click','own'],
 		['admob','vpn'],
 		['admob','self','click'],
@@ -26,10 +27,8 @@ def findPercentage():
 		'pay': 1,
 		'link': 1,
 		'paypal': 1,
-		'incom': 1,
 		'paid': 1,
 		'paytm': 1,
-		'daily': 1,
 		'admob': 3,
 		'cryptocurr': 1,
 		'click': 4,
@@ -45,7 +44,6 @@ def findPercentage():
 		' ad ': 4,
 		'advertis': 4,
 		' ad-': 4,
-		'clickbank': 7,
 		'adclick': 7,
 		'adzbazar': 10,
 		'paidvert': 10,
@@ -59,6 +57,17 @@ def findPercentage():
 		'bigtimebux': 10,
 		'adclickxpress': 10,
 	}
+	benign = [
+	'scam',
+	'fraud',
+	'dropship',
+	'train',
+	'sell',
+	'business'
+	]
+	safeCombinations = [
+		'without click'
+	]
 	data = json.load(open('linkStatusBuffer.json'))
 	data['classification'] = []
 	suspect = {}
@@ -91,10 +100,8 @@ def findPercentage():
 			flag = 0
 			wordFreq = {}
 			for word in wordList:
-				# if word in data['ldaDescriptionResults'][i]:
 				if word in data['ldaDescriptionResults'][i]:
 					flag +=1*wordList[word]
-				# for tWord in data['ldaDescriptionResults'][i].lower().split():
 
 				for tWord in data['description'][i]:
 					if word in tWord:
@@ -129,7 +136,7 @@ def findPercentage():
 				for link in data['linksDown'][i]:
 					if link not in uniqueLinks:
 						uniqueLinks.append(link)
-						flag += 4
+						flag += 2
 				# print flag
 			if len(data['linksUp'][i]):
 				uniqueLinks = []
@@ -147,7 +154,18 @@ def findPercentage():
 		for score in suspect[video]:
 			finalScore += score[0]
 		scoreDict[video] = finalScore
+	for i in range(len(data['videoId'])):
+		for word in safeCombinations:
+			if scoreDict[data['videoId'][i]] > 0 and word in data['title'][i].lower():
+				print data['title'][i].lower()
+				scoreDict[data['videoId'][i]] *= -1
+				print scoreDict[data['videoId'][i]]
+		if scoreDict[data['videoId'][i]] > 0:
+			for word in benign:
+				if word in data['title'][i].lower():
+					scoreDict[data['videoId'][i]] *= -1
+					break
 
 	with open('sampleClassifier.json','w') as f:
 		json.dump(scoreDict,f)
-findPercentage()
+# findPercentage()

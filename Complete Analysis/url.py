@@ -75,7 +75,7 @@ def autoRedirect(url):
 
 # print autoRedirect('http://www.bit.do/20ads')
 # print zaglCheck('za.gl/wNKiQd')
-# print active('Www.buxp.com',1)
+# print active('http://bit.ly/2dFYPWw',1)
 
 # print active('http://adf.ly/1o3CVb',1)
 # print active('za.gl/wNKiQd',1)
