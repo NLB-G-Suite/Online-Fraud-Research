@@ -2,8 +2,36 @@ import json
 import csv
 
 def csvConvert():
-	x = json.load(open('linkStatusBuffer.json'))
+	x = json.load(open('linkStatusBuffer(1).json'))
 	Scores = json.load(open('sampleClassifier.json'))
+	notclassified=0
+	totalMalLinks=[]
+	# scanlinks=0
+	for i in range(len(x['videoId'])):
+		maliciousLinks = []
+		if len(x['linksUp'][i]):
+			for link in x['scannedLink'][i]:
+				if 'result' not in x['scannedLink'][i][link]:
+					tempDict={}
+					tempDict[link]=x['scannedLink'][i][link]
+					maliciousLinks.append(tempDict)
+		totalMalLinks.append(maliciousLinks)
+
+		classify=0
+		title=x['title'][i].encode('ascii','ignore')
+		with open ('manuallyLabelled.txt','r') as f:
+			for line in f:
+				if title in line:
+					classify=1
+					if line[0]=='b':
+						x['classification'][i]='b'
+					if line[0]=='f':
+						x['classification'][i]='f'
+					break
+			if classify==0:
+				notclassified+=1
+				x['classification'][i]='Not classified'
+	x['totalMalLinks']=totalMalLinks
 	f = csv.writer(open("linkStatusBufferGithub.csv", "wb+"))
 
 	f.writerow(
@@ -22,6 +50,8 @@ def csvConvert():
 				'linksDownCount',
 				'linksDown',
 				'linksUp',
+				'ScannedLinks',
+				'maliciousLinks',
 				'FraudScore'
 			])
 
@@ -43,6 +73,8 @@ def csvConvert():
 				x['linksDownCount'][i],
 				x['linksDown'][i],
 				x['linksUp'][i],
+				x['scannedLink'][i],
+				x['totalMalLinks'][i],
 				Scores[x['videoId'][i]]
 			])
 		except Exception,e:

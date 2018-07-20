@@ -10,8 +10,8 @@ import ldaperVideo
 import sampleClassifier
 
 def main(argv):
-	query = argv[1]
-	nres = argv[2]
+	# query = argv[1]
+	# nres = argv[2]
 	# print nres
 	# print "Running crawler.."
 	# crawlerFixed.search(query, nres)

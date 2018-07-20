@@ -11,7 +11,7 @@ def getResults():
 				malwareType = {}
 				check = 0
 				for site in dictionary["scans"].keys():
-					if dictionary["scans"][site]["detected"]==True and not(dictionary["scans"][site]=="CLEAN MX") and not('amazon.com' in dictionary["url"] or 'amzn.' in dictionary["url"]  or "adf.ly" in dictionary["url"]):
+					if dictionary["scans"][site]["detected"]==True and (dictionary["scans"][site]!="CLEAN MX") and not('amazon.com' in dictionary["url"] or 'amzn.' in dictionary["url"]  or "adf.ly" in dictionary["url"]):
 						malwareType[site]=dictionary["scans"][site]["result"]
 						check = 1
 				if check == 0:

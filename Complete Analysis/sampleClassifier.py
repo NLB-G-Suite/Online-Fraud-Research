@@ -157,9 +157,9 @@ def findPercentage():
 	for i in range(len(data['videoId'])):
 		for word in safeCombinations:
 			if scoreDict[data['videoId'][i]] > 0 and word in data['title'][i].lower():
-				print data['title'][i].lower()
+				# print data['title'][i].lower()
 				scoreDict[data['videoId'][i]] *= -1
-				print scoreDict[data['videoId'][i]]
+				# print scoreDict[data['videoId'][i]]
 		if scoreDict[data['videoId'][i]] > 0:
 			for word in benign:
 				if word in data['title'][i].lower():
