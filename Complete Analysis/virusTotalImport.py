@@ -11,7 +11,9 @@ def getResults():
 				malwareType = {}
 				check = 0
 				for site in dictionary["scans"].keys():
-					if dictionary["scans"][site]["detected"]==True and (dictionary["scans"][site]!="CLEAN MX") and not('amazon.com' in dictionary["url"] or 'amzn.' in dictionary["url"]  or "adf.ly" in dictionary["url"]):
+					if dictionary["scans"][site]["detected"]==True and (site!="CLEAN MX") and not('amazon.com' in dictionary["url"] or 'amzn.' in dictionary["url"]  or "adf.ly" in dictionary["url"]):
+						# if site=="CLEAN MX":
+						# 	print dictionary["scans"][site]
 						malwareType[site]=dictionary["scans"][site]["result"]
 						check = 1
 				if check == 0:
@@ -36,3 +38,4 @@ def getResults():
 
 	with open('linkStatusBuffer(1).json','w') as f:
 		json.dump(data,f)
+# getResults()

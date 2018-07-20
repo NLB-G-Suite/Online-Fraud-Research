@@ -68,7 +68,7 @@ def findPercentage():
 	safeCombinations = [
 		'without click'
 	]
-	data = json.load(open('linkStatusBuffer.json'))
+	data = json.load(open('linkStatusBuffer(1).json'))
 	data['classification'] = []
 	suspect = {}
 
