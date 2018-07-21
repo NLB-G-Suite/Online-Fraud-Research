@@ -32,6 +32,9 @@ def csvConvert():
 				notclassified+=1
 				x['classification'][i]='Not classified'
 	x['totalMalLinks']=totalMalLinks
+	with open('linkStatusBuffer(1).json','w') as f:
+		json.dump(x,f)
+		
 	f = csv.writer(open("linkStatusBufferGithub.csv", "wb+"))
 
 	f.writerow(

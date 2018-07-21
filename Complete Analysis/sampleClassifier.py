@@ -29,7 +29,7 @@ def findPercentage():
 		'paypal': 1,
 		'paid': 1,
 		'paytm': 1,
-		'admob': 3,
+		'admob': 2,
 		'cryptocurr': 1,
 		'click': 4,
 		'profit': 2,
@@ -48,7 +48,8 @@ def findPercentage():
 		'adzbazar': 10,
 		'paidvert': 10,
 		'ptc': 7,
-		'neobux': 8,
+		'littlebux': 10,
+		'neobux': 10,
 		'fortadpay': 10,
 		'probux': 10,
 		'clixsens': 10,
@@ -56,6 +57,7 @@ def findPercentage():
 		'buxp': 10,
 		'bigtimebux': 10,
 		'adclickxpress': 10,
+		'family click': 10
 	}
 	benign = [
 	'scam',
@@ -84,8 +86,8 @@ def findPercentage():
 				if definiteFraud == len(words):
 					flag += 20
 			for word in wordList:
-				if word in data['title'][i]:
-					flag +=1*wordList[word]
+				if word in data['title'][i].lower():
+					flag += wordList[word]
 				for tWord in data['title'][i].lower().split():
 					if word in tWord:
 						if word in wordFreq:
@@ -100,8 +102,11 @@ def findPercentage():
 			flag = 0
 			wordFreq = {}
 			for word in wordList:
-				if word in data['ldaDescriptionResults'][i]:
-					flag +=1*wordList[word]
+				if len(data['description'][i].split()) < 10 and word in data['description'][i].lower():
+					flag += wordList[word]
+				else:
+					if word in data['ldaDescriptionResults'][i]:
+						flag += wordList[word]
 
 				for tWord in data['description'][i]:
 					if word in tWord:
@@ -157,9 +162,9 @@ def findPercentage():
 	for i in range(len(data['videoId'])):
 		for word in safeCombinations:
 			if scoreDict[data['videoId'][i]] > 0 and word in data['title'][i].lower():
-				# print data['title'][i].lower()
+				print data['title'][i].lower()
 				scoreDict[data['videoId'][i]] *= -1
-				# print scoreDict[data['videoId'][i]]
+				print scoreDict[data['videoId'][i]]
 		if scoreDict[data['videoId'][i]] > 0:
 			for word in benign:
 				if word in data['title'][i].lower():
@@ -168,4 +173,5 @@ def findPercentage():
 
 	with open('sampleClassifier.json','w') as f:
 		json.dump(scoreDict,f)
-# findPercentage()
+
+findPercentage()
