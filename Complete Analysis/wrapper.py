@@ -8,6 +8,7 @@ import virusTotalScan
 import virusTotalImport
 import ldaperVideo
 import sampleClassifier
+import stats
 
 def main(argv):
 	# query = argv[1]
@@ -27,6 +28,8 @@ def main(argv):
 	sampleClassifier.findPercentage()
 	print 'All videos classified, creating CSV file..'
 	json2csv.csvConvert()
+	print 'stats'
+	stats.statistics()
 	print 'Success!'
 	# print "Starting LDA Analysis per Channel.."
 	# descriptionsTagsTitlesExtract.makeDict()

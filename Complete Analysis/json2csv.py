@@ -21,7 +21,7 @@ def csvConvert():
 		title=x['title'][i].encode('ascii','ignore')
 		with open ('manuallyLabelled.txt','r') as f:
 			for line in f:
-				if title in line:
+				if title==line[3:-1]:
 					classify=1
 					if line[0]=='b':
 						x['classification'][i]='b'

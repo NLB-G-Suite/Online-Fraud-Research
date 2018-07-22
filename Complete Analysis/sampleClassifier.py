@@ -50,6 +50,7 @@ def findPercentage():
 		'ptc': 7,
 		'littlebux': 10,
 		'neobux': 10,
+		'pvtraffic': 10,
 		'fortadpay': 10,
 		'probux': 10,
 		'clixsens': 10,
