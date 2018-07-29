@@ -3,6 +3,7 @@ from apiclient.errors import HttpError
 from oauth2client.tools import argparser
 import json
 import urllib2
+import sys
 
 DEVELOPER_KEY = "AIzaSyB84_YL94d4I_7ABN0ZCxnX10DxOQzAV74"
 YOUTUBE_API_SERVICE_NAME = "youtube"
@@ -10,6 +11,8 @@ YOUTUBE_API_VERSION = "v3"
 
 # Authorization for using the Youtube API v3
 youtube = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION,developerKey=DEVELOPER_KEY)
+
+sys.setrecursionlimit(11000)
 
 def youtube_search(q, token,numOfResults, res,order="relevance",  location=None, location_radius=None):
     # change res to number of results required
@@ -114,8 +117,25 @@ def search(query,numOfResults):
             commentCount.append("No commentCount")
     youtube_dict = {'description': description, 'tags': tags,'channelId': channelId,'channelTitle': channelTitle,'categoryId':categoryId,'title':title,'videoId':videoId,'viewCount':viewCount,'commentCount':commentCount, 'comments': comments}
 
+    data = json.load(open('crawlerResult.json'))
+    for keys in youtube_dict:
+        data[keys] += youtube_dict[keys]
     with open('crawlerResult.json', 'w') as fp:
-        json.dump(youtube_dict, fp)
+        json.dump(data, fp)
    
     # with open('VideosPerChannel.json', 'w') as fp:
     #     json.dump(chan, fp)
+
+# search('earn money online',1000)
+# search('admob easy money',1000)
+# search('easy click money',1000)
+# search('how to make easy money online',1000)
+# search('earn online neobux',1000)
+# search('self click for easy money',1000)
+# search('android easy money making',1000)
+search('click on apps to make money',1000)
+
+
+
+
+

@@ -6,7 +6,7 @@ import gensim
 import json
 
 def ldaDesc():
-	x = json.load(open('linkStatusBuffer(1).json'))
+	x = json.load(open('crawlerResult.json'))
 	ldaDescriptionResults=[]
 
 	for index in range(len(x['videoId'])):
@@ -55,5 +55,7 @@ def ldaDesc():
 	x['ldaDescriptionResults']=ldaDescriptionResults
 
 
-	with open('linkStatusBuffer(1).json', 'w') as fp:
+	with open('crawlerResult.json', 'w') as fp:
 		json.dump(x,fp)
+
+ldaDesc()

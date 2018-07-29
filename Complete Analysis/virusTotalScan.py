@@ -3,7 +3,7 @@ import json
 import time
 
 def scan():
-	data = json.load(open('linkStatusBuffer(1).json'))
+	data = json.load(open('crawlerResult.json'))
 	 
 	uniqueLinks=[] 
 	for i in range(len(data['linksUp'])):

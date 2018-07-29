@@ -12,9 +12,10 @@ def findPercentage():
 	
 	combinations = [
 		['paid','to','click'],
-		['ad','click'],
+		['ad ','click'],
 		['ad','view','money'],
 		['ad','watch','money'],
+		['ad','watch','earn'],
 		['app','click','own'],
 		['admob','vpn'],
 		['admob','self','click'],
@@ -71,11 +72,12 @@ def findPercentage():
 	safeCombinations = [
 		'without click'
 	]
-	data = json.load(open('linkStatusBuffer(1).json'))
+	data = json.load(open('crawlerResult.json'))
 	data['classification'] = []
 	suspect = {}
 
 	for i in range(len(data['videoId'])):
+		print str(100*(float(i)/float(len(data['videoId']))))[:5]+'%'
 		try:
 			flag = 0
 			wordFreq = {}
@@ -135,24 +137,24 @@ def findPercentage():
 			suspect[data['videoId'][i]].append([flag,wordFreq])
 		except Exception,e:
 			print str(e)
-		try:
-			flag = 0
-			if len(data['linksDown'][i]):
-				uniqueLinks = []
-				for link in data['linksDown'][i]:
-					if link not in uniqueLinks:
-						uniqueLinks.append(link)
-						flag += 2
-				# print flag
-			if len(data['linksUp'][i]):
-				uniqueLinks = []
-				for link in data['scannedLink'][i]:
-					if link not in uniqueLinks and 'result' not in data['scannedLink'][i][link]:
-						uniqueLinks.append(link)
-						flag += 10
-			suspect[data['videoId'][i]].append([flag,[]])
-		except Exception,e:
-			print str(e)
+		# try:
+		# 	flag = 0
+		# 	if len(data['linksDown'][i]):
+		# 		uniqueLinks = []
+		# 		for link in data['linksDown'][i]:
+		# 			if link not in uniqueLinks:
+		# 				uniqueLinks.append(link)
+		# 				flag += 2
+		# 		# print flag
+		# 	# if len(data['linksUp'][i]):
+		# 	# 	uniqueLinks = []
+		# 	# 	for link in data['scannedLink'][i]:
+		# 	# 		if link not in uniqueLinks and 'result' not in data['scannedLink'][i][link]:
+		# 	# 			uniqueLinks.append(link)
+		# 	# 			flag += 10
+		# 	suspect[data['videoId'][i]].append([flag,[]])
+		# except Exception,e:
+		# 	print str(e)
 
 	scoreDict = {}
 	for video in suspect:
@@ -172,7 +174,7 @@ def findPercentage():
 					scoreDict[data['videoId'][i]] *= -1
 					break
 
-	with open('sampleClassifier.json','w') as f:
+	with open('sampleClassifierScaled.json','w') as f:
 		json.dump(scoreDict,f)
 
 findPercentage()

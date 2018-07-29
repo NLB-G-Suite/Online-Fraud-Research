@@ -14,6 +14,8 @@ def statistics():
 	trueNeg = 0
 	falseNeg = 0
 	unClass = 0
+	fraud=0
+	benign=0
 	false = []
 	for i in range(len(data['videoId'])):
 		if data['videoId'][i] in uniqueVid:
@@ -21,15 +23,17 @@ def statistics():
 			if len(data['description'][i]) == 0:
 				threshold -= 10
 			if data['tags'][i] == 'No tags':
-				threshold -= 5
-			if scores[data['videoId'][i]] > threshold and data['classification'][i] == 'f':
+				threshold -= 5 
+			if scores[data['videoId'][i]] > threshold and data['classification'][i].lower() == 'f':
 				truePos += 1
-			elif scores[data['videoId'][i]] > threshold and data['classification'][i] == 'b':
+				# fraud+=1
+			elif scores[data['videoId'][i]] > threshold and data['classification'][i].lower() == 'b':
 				falsePos += 1
-			elif scores[data['videoId'][i]] <= threshold and data['classification'][i] == 'f':
+			elif scores[data['videoId'][i]] <= threshold and data['classification'][i].lower() == 'f':
+				# benign+=1
 				falseNeg += 1
 				false.append([scores[data['videoId'][i]],data['videoId'][i]])
-			elif scores[data['videoId'][i]] <= threshold and data['classification'][i] == 'b':
+			elif scores[data['videoId'][i]] <= threshold and data['classification'][i].lower() == 'b':
 				trueNeg += 1
 			else:
 				unClass += 1
@@ -39,7 +43,10 @@ def statistics():
 	print 'FalsePositive',falsePos
 	print 'FalseNegative',falseNeg
 	print 'TrueNegative',trueNeg
-	print false
+	# print false
 	print 'unClass:',unClass
+	# print "Fraud: ",fraud
+	# print "Benign: ",benign
+
 
 statistics()

@@ -1,7 +1,7 @@
 import json 
 
 def getResults():
-	data=json.load(open('linkStatusBuffer(1).json'))
+	data=json.load(open('crawlerResult.json'))
 	virusTotal=json.load(open('URL_VirusTotal_Results.json'))
 
 	url={}
@@ -36,6 +36,6 @@ def getResults():
 		total.append(maliciousLinks)
 	data['scannedLink'] = total
 
-	with open('linkStatusBuffer(1).json','w') as f:
+	with open('crawlerResult.json','w') as f:
 		json.dump(data,f)
 # getResults()

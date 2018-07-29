@@ -109,7 +109,7 @@ def linkWork():
 	x['linksDownCount']=linksDownCount
 	x['classification']=classification
 
-	with open('linkStatusBuffer(1).json', 'w') as fp:
+	with open('crawlerResult.json', 'w') as fp:
 		json.dump(x,fp)
 
 
