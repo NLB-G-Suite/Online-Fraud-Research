@@ -6,7 +6,7 @@ import gensim
 import json
 
 def ldaDesc():
-	x = json.load(open('crawlerResult.json'))
+	x = json.load(open('linkStatusBuffer(1).json'))
 	ldaDescriptionResults=[]
 
 	for index in range(len(x['videoId'])):
@@ -44,9 +44,9 @@ def ldaDesc():
 		corpus = [dictionary.doc2bow(text) for text in texts]
 
 		# generate LDA model
-		ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=2, id2word = dictionary, passes=20)
+		ldamodel = gensim.models.ldamodel.LdaModel(corpus, num_topics=3, id2word = dictionary, passes=50)
 
-		ldaAns = ldamodel.print_topics(num_topics=3, num_words=3)
+		ldaAns = ldamodel.print_topics(num_topics=3, num_words=10)
 
 		ldaDescriptionResults.append(ldaAns)
 		
@@ -54,8 +54,25 @@ def ldaDesc():
 
 	x['ldaDescriptionResults']=ldaDescriptionResults
 
+	ldaClassResults=[]
+	for i in range(len(x['videoId'])):
+		try:
+			new_string=''
+			for result in x['ldaDescriptionResults'][i]:
+				for letter in result[1]:
+					if letter.isalpha():
+						new_string+=letter
+					elif letter=='+':
+						new_string+=' '
+				new_string+=' '
+			ldaClassResults.append(new_string)
+			
+		except Exception,e:
+			ldaClassResults.append('No description')
 
-	with open('crawlerResult.json', 'w') as fp:
+	x['ldaClassResults']=ldaClassResults
+
+	with open('newLDAClass.json', 'w') as fp:
 		json.dump(x,fp)
 
 ldaDesc()

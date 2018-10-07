@@ -2,10 +2,10 @@ import json
 import csv
 
 def csvConvert():
-	x = json.load(open('crawlerResult.json'))
-	Scores = json.load(open('sampleClassifierScaled.json'))
-	notclassified=0
-	totalMalLinks=[]
+	x = json.load(open('linkStatusBuffer(1).json'))
+	Scores = json.load(open('sampleClassifier.json'))
+	# notclassified=0
+	# totalMalLinks=[]
 	# scanlinks=0
 	# for i in range(len(x['videoId'])):
 	# 	maliciousLinks = []
@@ -32,29 +32,36 @@ def csvConvert():
 	# 			notclassified+=1
 	# 			x['classification'][i]='Not classified'
 	# x['totalMalLinks']=totalMalLinks
-	# with open('crawlerResult.json','w') as f:
+	# with open('linkStatusBuffer(1).json','w') as f:
 	# 	json.dump(x,f)
 		
-	f = csv.writer(open("crawlerResult.csv", "wb+"))
+	f = csv.writer(open("linkStatusMcafee.csv", "wb+"))
 
 	f.writerow(
 				['videoId',
 				'title',
 				'channelId',
-				# 'category',
-				# 'classification',
+				'category',
+				'classification',
 				'viewCount',
 				'commentCount',
 				'comments',
 				'tags',
 				'description',
-				# 'links',
-				# 'linksCount',
-				# 'linksDownCount',
-				# 'linksDown',
-				# 'linksUp',
-				# 'ScannedLinks',
-				# 'maliciousLinks',
+				'links',
+				'linksCount',
+				'linksDownCount',
+				'linksDown',
+				'linksUp',
+				'ScannedLinks',
+				'maliciousLinks',
+				'virusTotalMalCount',
+				'mcafeeScannedLink',
+				'mcafeeHighRisk',
+				'mcafeeMediumRisk',
+				'mcafeeUnverified',
+				'mcafeeMalCount',
+				'virusTotalMcafeeCommonCount',
 				'FraudScore'
 			])
 
@@ -64,20 +71,27 @@ def csvConvert():
 				['https://www.youtube.com/watch?v='+x['videoId'][i],
 				x['title'][i].encode('ascii','ignore'),
 				x['channelId'][i],
-				# x['category'][i],
-				# x['classification'][i],
+				x['category'][i],
+				x['classification'][i],
 				x['viewCount'][i],
 				x['commentCount'][i],
 				x['comments'][i],
 				x['tags'][i],
 				x['description'][i].encode('ascii','ignore'),
-				# x['links'][i],
-				# x['linksCount'][i],
-				# x['linksDownCount'][i],
-				# x['linksDown'][i],
-				# x['linksUp'][i],
-				# x['scannedLink'][i],
-				# x['totalMalLinks'][i],
+				x['links'][i],
+				x['linksCount'][i],
+				x['linksDownCount'][i],
+				x['linksDown'][i],
+				x['linksUp'][i],
+				x['scannedLink'][i],
+				x['totalMalLinks'][i],
+				len(x['totalMalLinks'][i]),
+				x['mcafeeScannedLink'][i],
+				x['mcafeeHighRisk'][i],
+				x['mcafeeMediumRisk'][i],
+				x['mcafeeUnverified'][i],
+				len(x['mcafeeHighRisk'][i])+len(x['mcafeeMediumRisk'][i]),
+				x['commonMal'][i],
 				Scores[x['videoId'][i]]
 			])
 		except Exception,e:
