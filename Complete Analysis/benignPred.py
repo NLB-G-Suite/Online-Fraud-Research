@@ -133,31 +133,7 @@ for i in range(len(videos)):
 	videos[i] = t 
 
 
-xTrain1, xTest1, y_train, y_test = train_test_split(videos, y, test_size=0.3, random_state=100)
-# y_train=[]
-# y_train=y
-# # xTest1=[]
-# len1=0
-# for i in range(len(dataCrypto['videoId'])):
-# 	len1+=1
-# 	try:
-# 		xTest1.append(dataCrypto['title'][i].encode('ascii','ignore')+dataCrypto['description'][i].encode('ascii','ignore')+str(dataCrypto['tags'][i]))
-# 	except:
-# 		xTest1.append(dataCrypto['title'][i].encode('ascii','ignore')+str(dataCrypto['tags'][i]))
-# len2=0
-# for i in range(len(dataAds['videoId'])):
-# 	len2+=1
-# 	try:
-# 		xTest1.append(dataAds['title'][i].encode('ascii','ignore')+dataAds['description'][i].encode('ascii','ignore')+str(dataAds['tags'][i]))
-# 	except:
-# 		xTest1.append(dataAds['title'][i].encode('ascii','ignore')+str(dataAds['tags'][i]))
-# len3=0
-# for i in range(len(dataStock['videoId'])):
-# 	len3+=1
-# 	try:
-# 		xTest1.append(dataStock['title'][i].encode('ascii','ignore')+dataStock['description'][i].encode('ascii','ignore')+str(dataStock['tags'][i]))
-# 	except:
-# 		xTest1.append(dataStock['title'][i].encode('ascii','ignore')+str(dataStock['tags'][i]))
+xTrain1, xTest1, y_train, y_test = train_test_split(videos, y, test_size=0.5, random_state=100)
 
 vectorizer = CountVectorizer()
 xTrain2 = []
@@ -167,9 +143,6 @@ for i in range(len(xTrain1)):
 for i in range(len(xTrain1)):
 	xTrain1[i] = xTrain1[i][:-4]
 xTrain1 = vectorizer.fit_transform(xTrain1)
-
-
-# xTrain1 = vectorizer.fit_transform(videos)
 
 
 xTest2 = []
@@ -191,87 +164,13 @@ wrongPred = []
 for i in range(len(predictions)):
 	if predictions[i]!=y_test[i]:
 		if int(xTest2[i][-4:]) < len(data['videoId']):
-			# print ['d'+xTest2[i][-4:],data['videoId'][int(xTest2[i][-4:])],predictions[i],y_test[i],data['classification'][int(xTest2[i][-4:])]]
 			wrongPred.append(['d'+xTest2[i][-4:],data['videoId'][int(xTest2[i][-4:])],predictions[i],y_test[i]])
 		elif int(xTest2[i][-4:]) < (len(data['videoId'])+len(data_test['videoId'])):
-			# print ['dt'+xTest2[i][-4:],data_test['videoId'][int(xTest2[i][-4:])-len(data['videoId'])][32:],predictions[i],y_test[i],data_test['classification'][int(xTest2[i][-4:])-len(data['videoId'])]]
 			wrongPred.append(['dt'+xTest2[i][-4:],data_test['videoId'][int(xTest2[i][-4:])-len(data['videoId'])][32:],predictions[i],y_test[i]])			
 		else:
-			# print ['db'+xTest2[i][-4:],dataBenign['videoId'][int(xTest2[i][-4:])-(len(data['videoId'])+len(data_test['videoId']))][32:],predictions[i],y_test[i],dataBenign['classification'][int(xTest2[i][-4:])-(len(data['videoId'])+len(data_test['videoId']))]]
 			wrongPred.append(['db'+xTest2[i][-4:],dataBenign['videoId'][int(xTest2[i][-4:])-(len(data['videoId'])+len(data_test['videoId']))][32:],predictions[i],y_test[i]])			
 
-		# except:
-		# 	print 'EXCPETION'
-		# 	continue
-			# print i,xTest2[i]
+
 print wrongPred
 
-
-# wrongPred = []
-# for i in range(len(predictions)):
-# 	if i<len1:
-# 		wrongPred.append(['https://www.youtube.com/watch?v='+dataCrypto['videoId'][i],predictions[i]])
-# 		# dataCrypto['classification'][i]=predictions[i]
-
-# 	elif i<len1+len2:
-# 		wrongPred.append(['https://www.youtube.com/watch?v='+dataAds['videoId'][i-len1],predictions[i]])
-# 		# dataAds['classification'][i]=predictions[i]
-
-# 	else:
-# 		wrongPred.append(['https://www.youtube.com/watch?v='+dataStock['videoId'][i-(len1+len2)],predictions[i]])
-# 		# dataStock['classification'][i]=predictions[i]
-
-# dataAds['classification']=[]
-# dataAds['category']=[]
-
-# for i in range(len(dataAds['videoId'])):
-# 	dataAds['videoId'][i]='https://www.youtube.com/watch?v='+dataAds['videoId'][i]
-# 	dataAds['classification'].append('b')
-# 	with open ('categorylist.txt','r') as file:
-# 			for line in file:
-# 				if dataAds['categoryId'][i] in line:
-# 					dataAds['category'].append(line[4:])
-# 					print [dataAds['category'][i],dataAds['categoryId'][i],line[0:3]]
-# 					break
-		
-	
-# for i in range(len(dataStock['videoId'])):
-# 	dataAds['videoId'].append('https://www.youtube.com/watch?v='+dataStock['videoId'][i])
-# 	dataAds['title'].append(dataStock['title'][i])
-# 	dataAds['channelId'].append(dataStock['channelId'][i])
-# 	with open ('categorylist.txt','r') as file:
-# 			for line in file:
-# 				if dataStock['categoryId'][i] in line:
-# 					dataAds['category'].append(line[4:])
-	
-# 	dataAds['classification'].append('b')
-# 	dataAds['viewCount'].append(dataStock['viewCount'][i])
-# 	dataAds['commentCount'].append(dataStock['commentCount'][i])
-# 	dataAds['comments'].append(dataStock['comments'][i])
-# 	dataAds['tags'].append(dataStock['tags'][i])
-# 	dataAds['description'].append(dataStock['description'][i])
-
-	
-# for i in range(len(dataCrypto['videoId'])):
-# 	dataAds['videoId'].append('https://www.youtube.com/watch?v='+dataCrypto['videoId'][i])
-# 	dataAds['title'].append(dataCrypto['title'][i])
-# 	dataAds['channelId'].append(dataCrypto['channelId'][i])
-# 	with open ('categorylist.txt','r') as file:
-# 			for line in file:
-# 				if dataCrypto['categoryId'][i] in line:
-# 					dataAds['category'].append(line[4:])
-	
-# 	dataAds['classification'].append('b')
-# 	dataAds['viewCount'].append(dataCrypto['viewCount'][i])
-# 	dataAds['commentCount'].append(dataCrypto['commentCount'][i])
-# 	dataAds['comments'].append(dataCrypto['comments'][i])
-# 	dataAds['tags'].append(dataCrypto['tags'][i])
-# 	dataAds['description'].append(dataCrypto['description'][i])
-
-# with open('benignData.json','w') as f:
-# 	json.dump(dataAds,f)
-
-	
-		
-# print len(wrongPred)
 
