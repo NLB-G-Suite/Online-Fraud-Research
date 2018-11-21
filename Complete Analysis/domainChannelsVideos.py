@@ -16,9 +16,7 @@ channels = json.load(open('domainChannels.json'))
 chan = {}
 count=0
 for channel in channels.keys():
-	count+=1
-	if count>=5:
-		break
+
 	print "channel"
 	chanVids = json.loads(urllib2.urlopen("https://www.googleapis.com/youtube/v3/search?key=AIzaSyClserQ1cuNOX9SssQT6-BvBf65JZZ1Lk4&channelId="+channel+"&part=snippet,id&order=date&maxResults=50").read())
 	# d = []
