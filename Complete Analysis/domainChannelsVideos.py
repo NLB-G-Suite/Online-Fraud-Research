@@ -16,9 +16,11 @@ channels = json.load(open('domainChannels.json'))
 chan = {}
 count=0
 for channel in channels.keys():
-
+	# count+=1
+	# if count>=5:
+	# 	break
 	print "channel"
-	chanVids = json.loads(urllib2.urlopen("https://www.googleapis.com/youtube/v3/search?key=AIzaSyClserQ1cuNOX9SssQT6-BvBf65JZZ1Lk4&channelId="+channel+"&part=snippet,id&order=date&maxResults=50").read())
+	chanVids = json.loads(urllib2.urlopen("https://www.googleapis.com/youtube/v3/search?key=AIzaSyClserQ1cuNOX9SssQT6-BvBf65JZZ1Lk4&channelId="+channel+"&part=snippet,id&order=date").read())
 	# d = []
 	print str(100*(count/float(len(channels.keys()))))[:4]+'%'
 
@@ -59,7 +61,7 @@ for channel in channels.keys():
 				except:
 					description.append('No description')
 			try:
-				commentsOnVideo = json.loads(urllib2.urlopen("https://www.googleapis.com/youtube/v3/commentThreads?key=AIzaSyB84_YL94d4I_7ABN0ZCxnX10DxOQzAV74&textFormat=plainText&part=snippet&videoId=" + chanVids['items'][k]['id']['videoId'],timeout=60).read())
+				commentsOnVideo = json.loads(urllib2.urlopen("https://www.googleapis.com/youtube/v3/commentThreads?key=AIzaSyB84_YL94d4I_7ABN0ZCxnX10DxOQzAV74&textFormat=plainText&part=snippet&videoId=" + chanVids['items'][k]['id']['videoId'] + "&maxResults=50",timeout=60).read())
 				c = []
 				for k in range(len(commentsOnVideo['items'])):
 					c.append(commentsOnVideo['items'][k]["snippet"]['topLevelComment']['snippet']['textDisplay'])
