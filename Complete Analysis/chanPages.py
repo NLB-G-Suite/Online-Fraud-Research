@@ -1,4 +1,4 @@
-# from apiclient.discovery import build
+from apiclient.discovery import build
 
 # DEVELOPER_KEY = 'AIzaSyClserQ1cuNOX9SssQT6-BvBf65JZZ1Lk4'
 # youtube = build('youtube', 'v3', developerKey=DEVELOPER_KEY)
@@ -15,7 +15,7 @@ import urllib
 import json
 
 def get_all_video_in_channel(channel_id):
-    api_key = 'AIzaSyB84_YL94d4I_7ABN0ZCxnX10DxOQzAV74'
+    api_key = 'AIzaSyClserQ1cuNOX9SssQT6-BvBf65JZZ1Lk4'
 
     base_video_url = 'https://www.youtube.com/watch?v='
     base_search_url = 'https://www.googleapis.com/youtube/v3/search?'
@@ -25,7 +25,11 @@ def get_all_video_in_channel(channel_id):
     video_links = []
     url = first_url
     while True:
-        inp = urllib.urlopen(url)
+        try:
+            inp = urllib.urlopen(url)
+        except:
+            inp = []
+            return inp
         resp = json.load(inp)
 
         for i in resp['items']:
