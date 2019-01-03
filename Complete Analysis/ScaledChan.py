@@ -10,21 +10,22 @@ from apiclient.discovery import build
 import chanPages
 
 # DEVELOPER_KEY = 'AIzaSyB84_YL94d4I_7ABN0ZCxnX10DxOQzAV74'
-youtube = build('youtube', 'v3', developerKey=DEVELOPER_KEY)
 
-count=0
 
-def chanVids(DEVELOPER_KEY,channels,chan):
+
+def chanVids(DEVELOPER_KEY,channels,count):
+	chan={}
+	youtube = build('youtube', 'v3', developerKey=DEVELOPER_KEY)
 	for channel in channels:
-		# count+=1
+		count+=1
 		while True:
 			try:
 				videos=chanPages.get_all_video_in_channel(channel)
 				break
 			except:
-				time.sleep(5)
-		# print str(100*(count/float(len(channels.keys()))))[:4]+'%'
-		print threading.currentThread().getName()
+				time.sleep(2)
+		print str(len(channels))+'   Thread'+threading.currentThread().getName()+':   '+str(100*(count/float(len(channels))))[:4]+'%'
+		# print threading.currentThread().getName()
         # +' ' +str(100*(count/float(numOfResults)))[:4]+'%'
 
 		title = []
@@ -50,14 +51,14 @@ def chanVids(DEVELOPER_KEY,channels,chan):
 					break
 				except Exception,e:
 					# print e
-					time.sleep(5)
+					time.sleep(2)
 			while True:
 				try:
 					result1 = youtube.videos().list(id=videos[i], part='statistics').execute()
 					break
 				except Exception,e:
 					print e
-					time.sleep(5)
+					time.sleep(2)
 			
 
 			for result in result1.get('items', []):
@@ -72,7 +73,10 @@ def chanVids(DEVELOPER_KEY,channels,chan):
 					commentCount.append('No commentCount')
 
 			for result in results.get('items', []):
-				title.append(result['snippet']['title'].encode('ascii','ignore')) 
+				try:
+					title.append(result['snippet']['title'].encode('ascii','ignore')) 
+				except:
+					title.append('No title')
 				try:
 					uploadTime.append(result['snippet']['publishedAt'])
 				except:
@@ -89,20 +93,27 @@ def chanVids(DEVELOPER_KEY,channels,chan):
 					categoryId.append(result['snippet']['categoryId'])
 				except:
 					categoryId.append('No categoryId')
-			try:
-				commentsOnVideo = json.loads(requests.get("https://www.googleapis.com/youtube/v3/commentThreads?key=AIzaSyB84_YL94d4I_7ABN0ZCxnX10DxOQzAV74&textFormat=plainText&part=snippet&videoId=" + videos[i] + "&maxResults=50",timeout=60).read())
-				c = []
-				for k in range(len(commentsOnVideo['items'])):
-					c.append(commentsOnVideo['items'][k]["snippet"]['topLevelComment']['snippet']['textDisplay'])
-				comments.append(c)
-			except:
-			    comments.append('No comments')
+			# try:
+			# 	commentsOnVideo = json.loads(requests.get("https://www.googleapis.com/youtube/v3/commentThreads?key=AIzaSyB84_YL94d4I_7ABN0ZCxnX10DxOQzAV74&textFormat=plainText&part=snippet&videoId=" + videos[i] + "&maxResults=50",timeout=60).read())
+			# 	c = []
+			# 	for k in range(len(commentsOnVideo['items'])):
+			# 		c.append(commentsOnVideo['items'][k]["snippet"]['topLevelComment']['snippet']['textDisplay'])
+			# 	comments.append(c)
+			# except:
+			#     comments.append('No comments')
 
 		chan[channel]['title']=title
 		chan[channel]['videoId']=videoId
 		chan[channel]['viewCount']=viewCount
 		chan[channel]['time']=uploadTime
+		chan[channel]['tags']=tags
+		chan[channel]['description']=description
 		chan[channel]['commentCount']=commentCount
+		chan[channel]['categoryId']=categoryId
+		# chan[channel]['categoryId']=categoryId
+
+		# comments = []
+
 	with open('scaledChan'+threading.currentThread().getName()+'.json','w') as f:
 		json.dump(chan,f)
 	print threading.currentThread().getName()+'  DONE'
@@ -114,24 +125,28 @@ for i in range(len(dataScaled['videoId'])):
 	if dataScaled['predClass'][i]=='f':
 		if dataScaled['channelId'][i] not in channels:
 			channels.append(dataScaled['channelId'][i])
-print channels			
-print len(channels)
-chan = {}
 count=0
 keys=[]
-
+print len(channels)
 with open('apiKeys.txt','r') as f:
 	for line in f:
 		if str(line[:-1]) not in keys:
 			keys.append(str(line[:-1]))
+threads=[]
+threadChan={}
+for x in range(49):
+	threadChan[x]=[]
+	threadChan[x]=channels[132*x:132*x+132]
 
-threads=[threading.Thread(target=chanVids,args=(keys[x],channels[130*x:130*x+130],chan)) for key in keys]
+	threads.append(threading.Thread(name=str(x),target=chanVids,args=(keys[x],channels[132*x:132*x+132],count)))
+threadChan[49]=[]
+threadChan[49]=channels[132*49:]
+
+threads.append(threading.Thread(name=str(49),target=chanVids,args=(keys[49],channels[132*49:],count)))
+
+
 for thread in threads:
     thread.start()
 for thread in threads:
     thread.join()
-# for x in range(50):
-# 	threading.Thread(name=str(x),target=chanVids,args=(keys[x],channels[130*x:130*x+130],chan)).start()
 
-# with open('scaledChanVids.json','w') as f:
-# 	json.dump(chan,f)
